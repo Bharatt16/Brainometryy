@@ -1,284 +1,281 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Byte Club Quiz</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --card: #1e293b;
-      --accent: #6366f1;
-      --accent2: #06b6d4;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --shadow: 0 10px 30px rgba(0,0,0,0.4);
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Byte Club Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg1: #0f2027;
+    --bg2: #203a43;
+    --bg3: #2c5364;
+    --card: rgba(255, 255, 255, 0.15);
+    --text: #f1f5f9;
+    --accent: #00b4d8;
+    --accent2: #7c3aed;
+    --shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    color: var(--text);
+    background-image: url("https://img.freepik.com/premium-vector/white-background-with-blue-technology-circuit_583398-369.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 0;
+  }
+
+  /* Overlay to improve text visibility */
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(10, 20, 40, 0.6); */
+    z-index: -1;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+    z-index: 2;
+    padding: 10px;
+  }
+
+  .logo img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 180, 216, 0.4);
+    margin-bottom: 15px;
+  }
+
+  .club-name {
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+  }
+
+  .tagline {
+    font-size: clamp(13px, 2vw, 16px);
+    color: #1d1e1e;
+    margin-top: 5px;
+  }
+
+  main {
+    width: 100%;
+    max-width: 850px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    z-index: 1;
+  }
+
+  .question-card {
+    background: var(--card);
+    backdrop-filter: blur(7px);
+    border-radius: 18px;
+    padding: 25px 30px;
+    position: relative;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    gap : 3vw;
+    align-items: center;
+  }
+
+  .question-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 35px rgba(0, 180, 216, 0.4);
+  }
+
+  .question-number {
+    font-size: 40px;
+    font-weight: 800;
+    /* position: absolute; */
+    top: 15px;
+    right: 25px;
+    color : rgb(71, 69, 69)
+  }
+
+  .question-card h4 {
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 700;
+    line-height: 1.5;
+    color: #1e1e1f;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 50px;
+    font-size: clamp(13px, 1.5vw, 15px);
+    color: #171718;
+  }
+
+  footer span {
+    color: var(--accent);
+  }
+
+  /* Tech glow orbs for background */
+  .tech-bg::before,
+  .tech-bg::after {
+    content: "";
+    position: fixed;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent2), transparent);
+    filter: blur(120px);
+    opacity: 0.3;
+    z-index: 0;
+    animation: move 15s infinite alternate ease-in-out;
+  }
+
+  .tech-bg::after {
+    background: radial-gradient(circle, var(--accent), transparent);
+    top: 70%;
+    left: 10%;
+    animation-delay: 5s;
+  }
+
+  @keyframes move {
+    from {
+      transform: translate(0, 0);
+    }
+    to {
+      transform: translate(100px, -100px);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 900px) {
     body {
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top left, #1e293b, #0f172a);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 40px 20px;
+      padding: 30px 15px;
     }
-
-    header {
-      text-align: center;
-      margin-bottom: 40px;
+    .question-card {
+      padding: 20px;
     }
+  }
 
-    .logo >img {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 15px;
-      box-shadow: var(--shadow);
-    }
-
-    .logo svg {
-      width: 45px;
-      height: 45px;
-      fill: white;
+  @media (max-width: 600px) {
+    .logo img {
+      width: 70px;
+      height: 70px;
     }
 
     .club-name {
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--accent2);
+      font-size: 22px;
     }
 
-    .site-title {
-      color: var(--muted);
-      font-size: 15px;
-      margin-top: 5px;
+    .tagline {
+      font-size: 14px;
+      color : black
     }
 
-    main {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-      padding: 30px;
-      max-width: 1000px;
-      width: 100%;
-      backdrop-filter: blur(10px);
+    .question-number {
+      font-size: 30px;
+      right: 15px;
     }
 
-    .quiz-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
+    .question-card {
+      padding: 18px;
     }
 
-    .q {
-      background: var(--card);
-      padding: 20px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
-    }
-
-    .q:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 25px rgba(99,102,241,0.25);
-    }
-
-    .q h4 {
-      margin-bottom: 12px;
+    .question-card h4 {
       font-size: 16px;
-      color: var(--text);
-    }
-
-    .opts {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .opt {
-      background: rgba(255,255,255,0.03);
-      padding: 10px 14px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: background 0.2s;
-      cursor: pointer;
-    }
-
-    .opt:hover {
-      background: rgba(255,255,255,0.1);
-    }
-
-    .opt input {
-      accent-color: var(--accent2);
-      width: 18px;
-      height: 18px;
-    }
-
-    .opt label {
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 30px;
-      color: var(--muted);
-      font-size: 14px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .btn {
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      border: none;
-      color: white;
-      font-weight: 600;
-      padding: 10px 18px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.2s ease;
-      box-shadow: 0 6px 18px rgba(99,102,241,0.3);
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(6,182,212,0.35);
+      line-height: 1.4;
     }
 
     footer {
-      text-align: center;
       margin-top: 30px;
       font-size: 13px;
-      color: var(--muted);
     }
+  }
 
-    #result {
-      display: none;
-      margin-top: 20px;
-      background: linear-gradient(90deg, rgba(34,197,94,0.12), rgba(34,197,94,0.05));
-      padding: 14px;
-      border-radius: 12px;
-      text-align: center;
-      color: #a7f3d0;
-      border: 1px solid rgba(34,197,94,0.18);
+  @media (max-width: 400px) {
+    .club-name {
+      font-size: 20px;
     }
-  </style>
+    .question-card {
+      padding: 15px;
+    }
+    .question-card h4 {
+      font-size: 15px;
+    }
+  }
+</style>
 </head>
+
 <body>
-  <header>
-    <div class="logo">
-        <img src="byteLogo.png" alt="">
-    </div>
-    <div class="club-name">Brainometry</div>
-    <div class="site-title">Unlocked Hidden Aptitude Potential</div>
-  </header>
+<div class="tech-bg"></div>
 
-  <main>
-    <form id="quizForm">
-      <div class="quiz-grid">
-        <section class="q"><h4>1. Which language runs in a web browser?</h4>
-          <div class="opts">
-            <div class="opt"><input type="radio" name="q1" value="A" id="q1a"><label for="q1a">Java</label></div>
-            <div class="opt"><input type="radio" name="q1" value="B" id="q1b"><label for="q1b">C</label></div>
-            <div class="opt"><input type="radio" name="q1" value="C" id="q1c"><label for="q1c">JavaScript</label></div>
-            <div class="opt"><input type="radio" name="q1" value="D" id="q1d"><label for="q1d">Python</label></div>
-          </div>
-        </section>
-        <section class="q"><h4>2. What does HTML stand for?</h4>
-          <div class="opts">
-            <div class="opt"><input type="radio" name="q2" value="A" id="q2a"><label for="q2a">Hyper Trainer Marking Language</label></div>
-            <div class="opt"><input type="radio" name="q2" value="B" id="q2b"><label for="q2b">HyperText Markup Language</label></div>
-            <div class="opt"><input type="radio" name="q2" value="C" id="q2c"><label for="q2c">HighText Machine Language</label></div>
-            <div class="opt"><input type="radio" name="q2" value="D" id="q2d"><label for="q2d">None of these</label></div>
-          </div>
-        </section>
-        <section class="q"><h4>3. Which tag is used to create a hyperlink in HTML?</h4>
-          <div class="opts">
-            <div class="opt"><input type="radio" name="q3" value="A" id="q3a"><label for="q3a">&lt;link&gt;</label></div>
-            <div class="opt"><input type="radio" name="q3" value="B" id="q3b"><label for="q3b">&lt;a&gt;</label></div>
-            <div class="opt"><input type="radio" name="q3" value="C" id="q3c"><label for="q3c">&lt;p&gt;</label></div>
-            <div class="opt"><input type="radio" name="q3" value="D" id="q3d"><label for="q3d">&lt;href&gt;</label></div>
-          </div>
-        </section>
-        <section class="q"><h4>4. Which CSS property controls text size?</h4>
-          <div class="opts">
-            <div class="opt"><input type="radio" name="q4" value="A" id="q4a"><label for="q4a">font-style</label></div>
-            <div class="opt"><input type="radio" name="q4" value="B" id="q4b"><label for="q4b">text-size</label></div>
-            <div class="opt"><input type="radio" name="q4" value="C" id="q4c"><label for="q4c">font-size</label></div>
-            <div class="opt"><input type="radio" name="q4" value="D" id="q4d"><label for="q4d">text-style</label></div>
-          </div>
-        </section>
-        <section class="q"><h4>5. Which command installs Node.js packages?</h4>
-          <div class="opts">
-            <div class="opt"><input type="radio" name="q5" value="A" id="q5a"><label for="q5a">npm install</label></div>
-            <div class="opt"><input type="radio" name="q5" value="B" id="q5b"><label for="q5b">node get</label></div>
-            <div class="opt"><input type="radio" name="q5" value="C" id="q5c"><label for="q5c">install pack</label></div>
-            <div class="opt"><input type="radio" name="q5" value="D" id="q5d"><label for="q5d">apt-get install</label></div>
-          </div>
-        </section>
-        <section class="q"><h4>6. Which is a JavaScript framework/library?</h4>
-          <div class="opts">
-            <div class="opt"><input type="radio" name="q6" value="A" id="q6a"><label for="q6a">React</label></div>
-            <div class="opt"><input type="radio" name="q6" value="B" id="q6b"><label for="q6b">Laravel</label></div>
-            <div class="opt"><input type="radio" name="q6" value="C" id="q6c"><label for="q6c">Django</label></div>
-            <div class="opt"><input type="radio" name="q6" value="D" id="q6d"><label for="q6d">Rails</label></div>
-          </div>
-        </section>
-        <section class="q"><h4>7. Which HTTP status means "Not Found"?</h4>
-          <div class="opts">
-            <div class="opt"><input type="radio" name="q7" value="A" id="q7a"><label for="q7a">200</label></div>
-            <div class="opt"><input type="radio" name="q7" value="B" id="q7b"><label for="q7b">301</label></div>
-            <div class="opt"><input type="radio" name="q7" value="C" id="q7c"><label for="q7c">404</label></div>
-            <div class="opt"><input type="radio" name="q7" value="D" id="q7d"><label for="q7d">500</label></div>
-          </div>
-        </section>
-        <section class="q"><h4>8. Which Git command creates a new branch?</h4>
-          <div class="opts">
-            <div class="opt"><input type="radio" name="q8" value="A" id="q8a"><label for="q8a">git branch &lt;name&gt;</label></div>
-            <div class="opt"><input type="radio" name="q8" value="B" id="q8b"><label for="q8b">git delete &lt;name&gt;</label></div>
-            <div class="opt"><input type="radio" name="q8" value="C" id="q8c"><label for="q8c">git remove &lt;name&gt;</label></div>
-            <div class="opt"><input type="radio" name="q8" value="D" id="q8d"><label for="q8d">git init &lt;name&gt;</label></div>
-          </div>
-        </section>
-      </div>
-      <div class="meta">
-        <span>8 Questions · Multiple choice</span>
-        <button class="btn" type="submit">Submit</button>
-      </div>
-      <div id="result"></div>
-    </form>
-    <footer>Made with ❤️ by <strong>Byte Club</strong></footer>
-  </main>
+<header>
+  <div class="logo">
+    <img src="byteLogo.png" alt="Byte Club Logo" />
+  </div>
+  <div class="club-name">Byte Club & T&D Department</div>
+  <div class="tagline">Unlock Hidden Aptitude Potential</div>
+</header>
 
-  <script>
-    const answers = { q1:'C', q2:'B', q3:'B', q4:'C', q5:'A', q6:'A', q7:'C', q8:'A' };
-    const form = document.getElementById('quizForm');
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      let score = 0, total = Object.keys(answers).length;
-      for (const q in answers) {
-        const val = form[q].value;
-        if (val === answers[q]) score++;
-      }
-      const result = document.getElementById('result');
-      result.style.display = 'block';
-      result.innerHTML = `<strong>Score:</strong> ${score}/${total}`;
-      window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
-    });
-  </script>
+<main>
+  <div class="question-card">
+    <div class="question-number">1.</div>
+    <h4>What is the main purpose of using APIs in modern web applications?</h4>
+  </div>
+  <div class="question-card">
+    <div class="question-number">2.</div>
+    <h4>Explain the difference between frontend and backend development.</h4>
+  </div>
+  <div class="question-card">
+    <div class="question-number">3.</div>
+    <h4>What is the use of React in web development?</h4>
+  </div>
+  <div class="question-card">
+    <div class="question-number">4.</div>
+    <h4>What is the significance of databases in full-stack applications?</h4>
+  </div>
+  <div class="question-card">
+    <div class="question-number">5.</div>
+    <h4>How does Git help developers manage their projects efficiently?</h4>
+  </div>
+  <div class="question-card">
+    <div class="question-number">6.</div>
+    <h4>What is the role of Node.js in building scalable web apps?</h4>
+  </div>
+  <div class="question-card">
+    <div class="question-number">7.</div>
+    <h4>Why is responsive design essential for modern websites?</h4>
+  </div>
+  <div class="question-card">
+    <div class="question-number">8.</div>
+    <h4>How do frameworks like Express.js simplify server-side coding?</h4>
+  </div>
+</main>
+
+<footer>
+  <p>Made with ❤️ by Byte Club</p>
+</footer>
 </body>
 </html>
